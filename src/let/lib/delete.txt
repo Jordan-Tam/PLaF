@@ -1,0 +1,5 @@
+eval_expr e2 >>= fun e2' -> return e2'
+
+eval_expr e2 >>= return
+
+eval_expr e2

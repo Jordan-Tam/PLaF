@@ -1,0 +1,27 @@
+# dune ut
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /home/geordi/.cache/dune/db
+# Workspace root: /home/geordi/PLaF/src/arith
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; installed_env =
+#      map
+#        { "INSIDE_DUNE" : "/home/geordi/PLaF/src/arith/_build/default"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; instrument_with = []
+#  }
+$ /usr/bin/ocamlc.opt -config > /tmp/dune_ab9e26_output
+$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl lib/interp.ml) > _build/default/lib/.arith.objs/arith__Interp.impl.d
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I lib/.arith.objs/byte -I /home/geordi/.opam/default/lib/menhirLib -I /home/geordi/.opam/default/lib/parser_plaf -no-alias-deps -opaque -open Arith -o lib/.arith.objs/byte/arith__Interp.cmo -c -impl lib/interp.ml)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o lib/arith.cma lib/.arith.objs/byte/arith.cmo lib/.arith.objs/byte/arith__Ds.cmo lib/.arith.objs/byte/arith__Interp.cmo)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -bin-annot -I lib/.utop/.utop.eobjs/byte -I /home/geordi/.opam/default/lib/bytes -I /home/geordi/.opam/default/lib/findlib -I /home/geordi/.opam/default/lib/lambda-term -I /home/geordi/.opam/default/lib/logs -I /home/geordi/.opam/default/lib/lwt -I /home/geordi/.opam/default/lib/lwt/unix -I /home/geordi/.opam/default/lib/lwt_react -I /home/geordi/.opam/default/lib/menhirLib -I /home/geordi/.opam/default/lib/mew -I /home/geordi/.opam/default/lib/mew_vi -I /home/geordi/.opam/default/lib/ocplib-endian -I /home/geordi/.opam/default/lib/ocplib-endian/bigstring -I /home/geordi/.opam/default/lib/parser_plaf -I /home/geordi/.opam/default/lib/react -I /home/geordi/.opam/default/lib/result -I /home/geordi/.opam/default/lib/trie -I /home/geordi/.opam/default/lib/uchar -I /home/geordi/.opam/default/lib/utop -I /home/geordi/.opam/default/lib/uucp -I /home/geordi/.opam/default/lib/uuseg -I /home/geordi/.opam/default/lib/uutf -I /home/geordi/.opam/default/lib/xdg -I /home/geordi/.opam/default/lib/zed -I /usr/lib/ocaml/compiler-libs -I /usr/lib/ocaml/threads -I lib/.arith.objs/byte -no-alias-deps -o lib/.utop/.utop.eobjs/byte/dune__exe__Utop.cmo -c -impl lib/.utop/utop.ml-gen)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -o lib/.utop/utop.bc /usr/lib/ocaml/compiler-libs/ocamlcommon.cma /usr/lib/ocaml/compiler-libs/ocamlbytecomp.cma /usr/lib/ocaml/compiler-libs/ocamltoplevel.cma /home/geordi/.opam/default/lib/findlib/findlib.cma /home/geordi/.opam/default/lib/findlib/findlib_top.cma /home/geordi/.opam/default/lib/logs/logs.cma /home/geordi/.opam/default/lib/lwt/lwt.cma /home/geordi/.opam/default/lib/logs/logs_lwt.cma /usr/lib/ocaml/unix.cma /usr/lib/ocaml/bigarray.cma /home/geordi/.opam/default/lib/ocplib-endian/ocplib_endian.cma /home/geordi/.opam/default/lib/ocplib-endian/bigstring/ocplib_endian_bigstring.cma /usr/lib/ocaml/threads/threads.cma /home/geordi/.opam/default/lib/lwt/unix/lwt_unix.cma -I /home/geordi/.opam/default/lib/lwt/../stublibs /home/geordi/.opam/default/lib/react/react.cma /home/geordi/.opam/default/lib/lwt_react/lwt_react.cma /home/geordi/.opam/default/lib/result/result.cma /home/geordi/.opam/default/lib/uutf/uutf.cma /home/geordi/.opam/default/lib/uucp/uucp.cma /home/geordi/.opam/default/lib/uuseg/uuseg.cma /home/geordi/.opam/default/lib/zed/zed.cma /home/geordi/.opam/default/lib/trie/trie.cma /home/geordi/.opam/default/lib/mew/mew.cma /home/geordi/.opam/default/lib/mew_vi/mew_vi.cma /home/geordi/.opam/default/lib/lambda-term/lambda_term.cma -I /home/geordi/.opam/default/lib/lambda-term/../stublibs /home/geordi/.opam/default/lib/xdg/xdg.cma -I /home/geordi/.opam/default/lib/xdg/../stublibs /home/geordi/.opam/default/lib/utop/uTop.cma /home/geordi/.opam/default/lib/menhirLib/menhirLib.cma /home/geordi/.opam/default/lib/parser_plaf/parser_plaf.cma lib/arith.cma lib/.utop/.utop.eobjs/byte/dune__exe__Utop.cmo -linkall -warn-error -31)

@@ -76,16 +76,33 @@ let rec eval_expr : expr -> exp_val ea_result = fun e ->
   | NewRef(e) ->
     eval_expr e >>= fun ev ->
     return (RefVal (Store.new_ref g_store ev))
+    (* LECTURE IMPLEMENTATION:
+    eval_expr e >>= fun v ->
+    let l = Store.new_ref g_store v
+    in return (RefVal l)   
+    *)
   | DeRef(e) ->
     eval_expr e >>=
     int_of_refVal >>= 
     Store.deref g_store
+    (* LECTURE IMPLEMENTATION:
+    eval_expr e >>=
+    int_of_refVal >>= fun l ->
+    Store.deref g_store l
+    *)
   | SetRef(e1,e2) ->
     eval_expr e1 >>=
     int_of_refVal >>= fun l ->
     eval_expr e2 >>= fun ev ->
     Store.set_ref g_store l ev >>= fun _ ->
     return UnitVal    
+    (* LECTURE IMPLEMENTATION:
+    eval_expr e1 >>=
+    int_of_refVal >>= fun l ->
+    eval_expr e2 >>= fun w ->
+    Store.set_ref g_store l w >>= fun _ ->
+    return UnitVal
+    *)
   | BeginEnd([]) ->
     return UnitVal
   | BeginEnd(es) ->
@@ -97,7 +114,57 @@ let rec eval_expr : expr -> exp_val ea_result = fun e ->
     let str_store = Store.string_of_store string_of_expval g_store 
     in (print_endline (str_env^"\n"^str_store);
     error "Reached breakpoint")
+  | IsNumber(e) ->
+    eval_expr e >>= fun n ->
+      begin match n with 
+      | NumVal(_) -> return @@ BoolVal (true)
+      | _ -> return @@ BoolVal (false)
+      end
+  | IsEqual(e1,e2) ->
+    eval_expr e1 >>= int_of_numVal >>= fun n1 ->
+    eval_expr e2 >>= int_of_numVal >>= fun n2 ->
+    return @@ BoolVal (n1=n2)
+  | IsGT(e1,e2) ->
+    eval_expr e1 >>= int_of_numVal >>= fun n1 ->
+    eval_expr e2 >>= int_of_numVal >>= fun n2 ->
+    return @@ BoolVal (n1>n2)
+  | IsLT(e1,e2) ->
+    eval_expr e1 >>= int_of_numVal >>= fun n1 ->
+    eval_expr e2 >>= int_of_numVal >>= fun n2 ->
+    return @@ BoolVal (n1<n2)
+  | Record(fs) ->
+    sequence (List.map process_field fs) >>= fun evs ->
+      return (RecordVal (addIds fs evs))
+  | Proj(e,id) ->
+    eval_expr e >>= fun record -> (record_lookup record id)
+  | SetField(e1,id,e2) ->
+    eval_expr e1 >>= fun record ->
+    eval_expr e2 >>= fun newValue ->
+    (record_lookup record id) >>= fun reference ->
+    int_of_refVal reference >>= fun int_of_reference ->
+    Store.set_ref g_store int_of_reference newValue >>= fun _ ->
+    return UnitVal
   | _ -> failwith ("Not implemented: "^string_of_expr e)
+  and
+  process_field(_id,(is_mutable,e)) =
+  (* Evaluate the expression "e" *)
+  eval_expr e >>= fun ev ->
+    if is_mutable
+    (* If the record field is mutable, store its value in the array of mutable data and return the reference to that new value. *)
+    then return (RefVal (Store.new_ref g_store ev))
+    (* Otherwise, return the evaluated value itself. *)
+    else return ev
+
+
+
+
+
+
+(* and eval_exprs es =
+  match es with
+  | [] -> return []
+  | e::t *)
+
 
 let eval_prog (AProg(_,e)) =
   eval_expr e         
